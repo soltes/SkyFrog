@@ -1,0 +1,5 @@
+## YAML Template.
+User(erik):
+  email: erik@gmail.com
+  password: secret
+  fullname: Erik
