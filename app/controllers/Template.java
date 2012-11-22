@@ -5,15 +5,12 @@
 package controllers;
 
 import java.io.File;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import net.sourceforge.rtf.ITemplateEngine;
 import net.sourceforge.rtf.RTFTemplate;
 import net.sourceforge.rtf.UnsupportedRTFTemplate;
 import net.sourceforge.rtf.helper.RTFTemplateBuilder;
-import play.mvc.Controller;
 import play.mvc.With;
 
 /**
@@ -21,7 +18,7 @@ import play.mvc.With;
  * @author Andrej
  */
 @With(Secure.class)
-public class Template extends Controller {
+public class Template extends SecureController {
 
 	public static void pokus() throws UnsupportedRTFTemplate, Exception {
 		String rtfSource = "public/rtf/template.rtf";

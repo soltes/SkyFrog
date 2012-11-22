@@ -1,0 +1,55 @@
+#{extends 'main_with_nav.html' /}
+
+<div class="row-fluid">
+	<div class="span4 well">
+
+		<a class="btn btn-primary" href="/createnew">Nový projekt</a>
+		<hr />
+		<div id="accordion">
+	#{list items:user.projects, as:'project' }
+			<h3>${project.name}</h3>
+			<div>
+				<p>
+					<a href="/project/${project.id}/people">Ľudia</a>
+				</p>
+				<p>
+					<a href="/project/${project.id}/tasks">Úlohy</a>
+				</p>
+				<p>
+					<a href="/project/${project.id}/sources">Zdrojové kódy</a>
+				</p>
+
+			</div>
+	#{/list}
+
+			<h3>Projekt 2</h3>
+			<div>
+				<p>
+					<a href="">Ulohy</a>
+				</p>
+				<p>
+					<a href="">Zdrojove kody</a>
+				</p>
+			</div>
+			<h3>Projekt 3</h3>
+			<div>
+				<p>
+					<a href="">Ulohy</a>
+				</p>
+				<p>
+					<a href="">Zdrojove kody</a>
+				</p>
+			</div>
+			<h3>Section 4</h3>
+			<div>
+				<p>
+					<a href="">Ulohy</a>
+				</p>
+				<p>
+					<a href="">Zdrojove kody</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	#{doLayout /}
+</div>

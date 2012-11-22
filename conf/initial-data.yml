@@ -1,5 +1,11 @@
 ## YAML Template.
+Project(project1):
+  name: Project One
+  desc: Projekt o niecom
+  users: []
+
 User(erik):
   email: erik@gmail.com
   password: secret
   fullname: Erik
+  projects: [project1]

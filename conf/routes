@@ -4,9 +4,12 @@
 
 # Home page
 GET             /                               Application.index
-GET		/createnew                              Project.createNew
-GET		/createnew2                             Project.createNew2
 GET		/pokus									Template.pokus
+
+# Projektove stranky
+GET		/createnew								ProjectCtrl.createNew
+GET		/project/{id}/people					ProjectCtrl.people
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

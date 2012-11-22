@@ -24,6 +24,9 @@ public class User extends Model {
     public boolean isAdmin;
     public boolean isProfessor;
     
+	@ManyToMany(mappedBy="users")
+	public List<Project> projects;
+	
     public User(String email, String password, String fullname) {
         this.email = email;
         this.password = password;

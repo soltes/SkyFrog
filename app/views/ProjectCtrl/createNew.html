@@ -1,0 +1,35 @@
+#{extends 'main_nav_sidebar.html' /}
+#{set title:'Nový projekt' /}
+
+
+<div class="span8">
+	<h2>Nový projekt</h2>
+	<hr />
+
+
+	<div class="row">
+		<div class="span8">
+			<form class="form-horizontal" action="@{ProjectCtrl.addProject}" method="POST">
+				<div class="control-group">
+					<label class="control-label" for="name">Názov</label>
+					<div class="controls">
+						<input type="text" id="name" name="name" placeholder="Nový projekt">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="desc">Popis</label>
+					<div class="controls">
+						<textarea rows="3" id="desc" name="desc" placeholder="Popis projektu"></textarea>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="desc"></label>
+					<div class="controls">
+						<button class="btn btn-primary" type="submit">Vytvor projekt</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>
