@@ -7,6 +7,7 @@ import java.util.*;
 
 import models.*;
 
+@With(Secure.class)
 public class Project extends Controller {
 
     public static void createNew() {

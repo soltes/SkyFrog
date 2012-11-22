@@ -14,11 +14,13 @@ import net.sourceforge.rtf.RTFTemplate;
 import net.sourceforge.rtf.UnsupportedRTFTemplate;
 import net.sourceforge.rtf.helper.RTFTemplateBuilder;
 import play.mvc.Controller;
+import play.mvc.With;
 
 /**
  *
  * @author Andrej
  */
+@With(Secure.class)
 public class Template extends Controller {
 
 	public static void pokus() throws UnsupportedRTFTemplate, Exception {
@@ -27,8 +29,6 @@ public class Template extends Controller {
 		
 
 		File target = new File(rtfTarget);
-		if (target.exists())
-			System.out.print("exist");
 		
 		// 1. Get default RTFtemplateBuilder
 		RTFTemplateBuilder builder = RTFTemplateBuilder.newRTFTemplateBuilder();

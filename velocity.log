@@ -1,30 +1,30 @@
-Thu Nov 22 18:08:53 CET 2012  [debug] AvalonLogChute initialized using file 'velocity.log'
-Thu Nov 22 18:08:53 CET 2012  [trace] *******************************************************************
-Thu Nov 22 18:08:53 CET 2012  [debug] Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
-Thu Nov 22 18:08:53 CET 2012  [trace] RuntimeInstance initializing.
-Thu Nov 22 18:08:53 CET 2012  [debug] Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
-Thu Nov 22 18:08:53 CET 2012  [debug] Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
-Thu Nov 22 18:08:53 CET 2012  [debug] Using logger class org.apache.velocity.runtime.log.AvalonLogChute
-Thu Nov 22 18:08:53 CET 2012  [debug] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
-Thu Nov 22 18:08:54 CET 2012  [debug] ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
-Thu Nov 22 18:08:54 CET 2012  [trace] FileResourceLoader : initialization starting.
-Thu Nov 22 18:08:54 CET 2012  [debug] Do unicode file recognition:  false
-Thu Nov 22 18:08:54 CET 2012   [info] FileResourceLoader : adding path '.'
-Thu Nov 22 18:08:54 CET 2012  [trace] FileResourceLoader : initialization complete.
-Thu Nov 22 18:08:54 CET 2012  [debug] ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
-Thu Nov 22 18:08:54 CET 2012  [trace] Default ResourceManager initialization complete.
-Thu Nov 22 18:08:54 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
-Thu Nov 22 18:08:54 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
-Thu Nov 22 18:08:54 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
-Thu Nov 22 18:08:54 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Include
-Thu Nov 22 18:08:54 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
-Thu Nov 22 18:08:54 CET 2012  [debug] Created '20' parsers.
-Thu Nov 22 18:08:54 CET 2012  [trace] Velocimacro : initialization starting.
-Thu Nov 22 18:08:54 CET 2012  [debug] Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
-Thu Nov 22 18:08:54 CET 2012  [debug] Velocimacro : Default library not found.
-Thu Nov 22 18:08:54 CET 2012  [debug] Velocimacro : allowInline = true : VMs can be defined inline in templates
-Thu Nov 22 18:08:54 CET 2012  [debug] Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
-Thu Nov 22 18:08:54 CET 2012  [debug] Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
-Thu Nov 22 18:08:54 CET 2012  [debug] Velocimacro : autoload off : VM system will not automatically reload global library macros
-Thu Nov 22 18:08:54 CET 2012  [trace] Velocimacro : Velocimacro : initialization complete.
-Thu Nov 22 18:08:54 CET 2012  [trace] RuntimeInstance successfully initialized.
+Thu Nov 22 18:53:34 CET 2012  [debug] AvalonLogChute initialized using file 'velocity.log'
+Thu Nov 22 18:53:34 CET 2012  [trace] *******************************************************************
+Thu Nov 22 18:53:34 CET 2012  [debug] Starting Apache Velocity v1.5 (compiled: 2007-02-22 08:52:29)
+Thu Nov 22 18:53:34 CET 2012  [trace] RuntimeInstance initializing.
+Thu Nov 22 18:53:34 CET 2012  [debug] Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+Thu Nov 22 18:53:34 CET 2012  [debug] Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+Thu Nov 22 18:53:34 CET 2012  [debug] Using logger class org.apache.velocity.runtime.log.AvalonLogChute
+Thu Nov 22 18:53:34 CET 2012  [debug] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+Thu Nov 22 18:53:34 CET 2012  [debug] ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+Thu Nov 22 18:53:34 CET 2012  [trace] FileResourceLoader : initialization starting.
+Thu Nov 22 18:53:34 CET 2012  [debug] Do unicode file recognition:  false
+Thu Nov 22 18:53:34 CET 2012   [info] FileResourceLoader : adding path '.'
+Thu Nov 22 18:53:34 CET 2012  [trace] FileResourceLoader : initialization complete.
+Thu Nov 22 18:53:34 CET 2012  [debug] ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+Thu Nov 22 18:53:34 CET 2012  [trace] Default ResourceManager initialization complete.
+Thu Nov 22 18:53:34 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+Thu Nov 22 18:53:34 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+Thu Nov 22 18:53:34 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+Thu Nov 22 18:53:34 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+Thu Nov 22 18:53:34 CET 2012  [debug] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+Thu Nov 22 18:53:34 CET 2012  [debug] Created '20' parsers.
+Thu Nov 22 18:53:34 CET 2012  [trace] Velocimacro : initialization starting.
+Thu Nov 22 18:53:34 CET 2012  [debug] Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+Thu Nov 22 18:53:34 CET 2012  [debug] Velocimacro : Default library not found.
+Thu Nov 22 18:53:34 CET 2012  [debug] Velocimacro : allowInline = true : VMs can be defined inline in templates
+Thu Nov 22 18:53:34 CET 2012  [debug] Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+Thu Nov 22 18:53:34 CET 2012  [debug] Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+Thu Nov 22 18:53:34 CET 2012  [debug] Velocimacro : autoload off : VM system will not automatically reload global library macros
+Thu Nov 22 18:53:34 CET 2012  [trace] Velocimacro : Velocimacro : initialization complete.
+Thu Nov 22 18:53:34 CET 2012  [trace] RuntimeInstance successfully initialized.
