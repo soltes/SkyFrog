@@ -1,13 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-/**
- *
- * @author Andrej
- */
-public class Task {
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import play.db.jpa.Model;
+
+@Entity
+public class Task extends Model {
+	
+	public String name;
+	
+	public Date from;
+	public Date to;
+	
+	@ManyToMany
+	public List<User> assigned;
 	
 }
