@@ -1,0 +1,33 @@
+#{extends 'main_with_nav.html' /}
+#{set title:'Nový projekt' /}
+
+<div class="row">
+	<div class="span12">
+		<h2>Nový projekt</h2> <h4>Časť 1/2</h4>
+		<hr />
+	</div>
+</div>
+<div class="row">
+	<div class="span8">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="name">Názov</label>
+				<div class="controls">
+					<input type="text" id="name" placeholder="Nový projekt">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="desc">Popis</label>
+				<div class="controls">
+					<textarea rows="3" id="desc" placeholder="Popis projektu"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="desc"></label>
+				<div class="controls">
+					<button class="btn btn-primary" type="submit">Vytvor projekt</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
