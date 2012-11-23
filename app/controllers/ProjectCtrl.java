@@ -9,6 +9,12 @@ import models.*;
 @With(Secure.class)
 public class ProjectCtrl extends SecureController {
 
+	@Before
+	public static void setUP(long projectid) {
+		Project p = Project.findById(projectid);
+		renderArgs.put("project", p);
+	}
+	
     public static void createNew() {
         render();
     }

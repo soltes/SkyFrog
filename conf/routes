@@ -3,12 +3,12 @@
 # ~~~~
 
 # Home page
-GET             /                               Application.index
+GET     /										Application.index
 GET		/pokus									Template.pokus
 
 # Projektove stranky
 GET		/createnew								ProjectCtrl.createNew
-GET		/project/{id}/people					ProjectCtrl.people
+GET		/project/{projectid}/people				ProjectCtrl.people
 
 
 # Ignore favicon requests
