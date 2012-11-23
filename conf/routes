@@ -9,7 +9,11 @@ GET		/pokus									Template.pokus
 # Projektove stranky
 GET		/createnew								ProjectCtrl.createNew
 GET		/project/{projectid}/people				ProjectCtrl.people
+GET		/project/{projectid}/adduser			ProjectCtrl.addUser
+GET		/project/{projectid}/exituser/{userid}	ProjectCtrl.exitUser
 
+# Ajax
+GET		/useremails								Ajax.userEmails
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

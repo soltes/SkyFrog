@@ -10,7 +10,7 @@ import models.*;
 public class ProjectCtrl extends SecureController {
 
 	@Before
-	public static void setUP(long projectid) {
+	public static void setUp(long projectid) {
 		Project p = Project.findById(projectid);
 		renderArgs.put("project", p);
 	}
@@ -29,7 +29,39 @@ public class ProjectCtrl extends SecureController {
 		Application.index();
 	}
     
-	public static void people(long id) {
+	public static void people() {
 		render();
 	}
+	
+	public static void addUser(String people_autocomplete) {
+		User u = User.find("byEmail", people_autocomplete).first();
+		Project current = (Project) renderArgs.get("project");
+		if (!current.users.contains(u)) {
+			current.users.add(u);
+			current.save();
+		}			
+		if (!u.projects.contains(current)) {
+			u.projects.add(current);
+			u.save();
+		}
+				
+		renderTemplate("ProjectCtrl/people.html");
+	}	
+	
+	public static void exitUser(long userid) {
+		User u = User.findById(userid);
+		Project current = (Project) renderArgs.get("project");
+		if (current.users.contains(u)) {
+			current.users.remove(u);
+			current.save();
+		}			
+		if (u.projects.contains(current)) {
+			u.projects.remove(current);
+			u.save();
+		}
+				
+		renderTemplate("ProjectCtrl/people.html");
+	}
+	
+	
 }

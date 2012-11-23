@@ -8,12 +8,12 @@
 
 	<div class="row-fluid">
 		<div class="span6">
-			<form>
+			<form action="/project/${project.id}/adduser">
 				<fieldset>
 					<!-- <legend>Legend</legend> -->
 					<label>Pridaj človeka do projektu</label>
-					<input type="text" placeholder="Meno...">
-					<span class="help-block">Vyber človeka a vlož ho tlačidlom vlož</span>
+					<input type="text" placeholder="Meno..." name="people_autocomplete" id="people_autocomplete">
+					<span class="help-block">Nájdi email a vlož človeka do projektu</span>
 					<button class="btn btn-primary" type="submit">
 						Vlož <i class="icon-arrow-right icon-white"></i>
 					</button>
@@ -24,19 +24,18 @@
 
 		<div class="span6">
 			<div class="well namebox-container">
+#{list items:project.users, as:'usr'}
 				<div class="namebox clearfix">
-					<img class="namebox-avatar" src="" />
-					<p class="namebox-name">
-						Jožko Mrkvička
-					</p>
+					<!-- <img class="namebox-avatar" src="" /> -->
+					<div class="namebox-name">
+						<div>${usr.fullname}</div><div><i>${usr.email}</i></div>
+					</div>
+					<div class="namebox-close pull-right clearfix">
+						<a class="close pull-right" href="/project/${project.id}/exituser/${usr.id}">&times;</a>
+						<p class="pull-right">Vyhoď &nbsp;</p>
+					</div>
 				</div>
-
-				<div class="namebox clearfix">
-					<img class="namebox-avatar" src="" />
-					<p class="namebox-name">
-						Jožko Mrkvička
-					</p>
-				</div>
+#{/list}
 			</div>
 		</div>
 	</div>
