@@ -6,4 +6,34 @@
 	<h2>Zdrojové kódy</h2>
 	<hr />
 
+	<div class="">
+		<h5>Uploadni nový súbor</h5>
+		<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/project/${project.id}/sources/upload">
+
+			<div class="control-group">
+				<label class="control-label">Súbor</label> 
+				<div class="controls">
+					<input type="file" name="attachment" id="attachment" />
+				</div>
+			</div>			 
+			<div class="control-group">
+				<label class="control-label">Verzia:</label> 
+				<div class="controls">
+					<input type="input" name="version" id="version" placeholder="1.0" />
+				</div>
+			</div>
+			<button type="submit" class="btn">Odošli</button>
+		</form>
+	</div>
+
+	<div class="span7 well">
+#{list items:project.sources, as:'source'}
+		<div class="clearfix">
+			<i class="icon-file"></i>${source.filename}, verzia: ${source.version}
+			<a class="pull-right" href="/public/sourcefiles/${source.id}_${source.filename}">
+				Stiahni
+			</a>
+		</div>
+#{/list}
+	</div>
 </div>

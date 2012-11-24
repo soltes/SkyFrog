@@ -48,6 +48,7 @@ var selected_task = -1;
 
 function task_click(taskid) {
 	selected_task = taskid;
+	$("#task-edit").fadeIn();
 	$.getJSON('/gettask', {taskid: taskid}, function (task) {
 		$("#task-name").val(task.name);
 		if (task.start) {

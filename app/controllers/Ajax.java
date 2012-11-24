@@ -41,7 +41,6 @@ public class Ajax extends Controller {
 	
 	public static void editTask(long taskid, Date start, Date finish, boolean completed) {
 		Task t = Task.findById(taskid);
-		System.out.println(start);
 		if (t != null) {
 			t.start = start;
 			t.finish = finish;

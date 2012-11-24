@@ -5,7 +5,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -23,6 +22,9 @@ public class Project extends Model {
 	
 	@OneToMany
 	public List<Task> tasks;
+	
+	@OneToMany
+	public List<SourceFile> sources;
 	
 	public Project(String name, String desc) {
 		this.name = name;

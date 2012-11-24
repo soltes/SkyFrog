@@ -15,6 +15,7 @@ GET		/project/{projectid}/tasks				ProjectCtrl.tasks
 GET		/project/{projectid}/sources			ProjectCtrl.sources
 GET		/project/{projectid}/files				ProjectCtrl.files
 GET		/project/{projectid}/statistics			ProjectCtrl.statistics
+POST 	/project/{projectid}/sources/upload		ProjectCtrl.sourceUpload
 
 
 # Ajax
