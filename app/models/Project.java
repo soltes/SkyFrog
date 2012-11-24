@@ -26,6 +26,12 @@ public class Project extends Model {
 	@OneToMany
 	public List<SourceFile> sources;
 	
+	@OneToMany
+	public List<MiscFile> files;
+	
+	@OneToMany
+	public List<Template> templates;
+	
 	public Project(String name, String desc) {
 		this.name = name;
 		this.desc = desc;

@@ -10,6 +10,17 @@
 				<label>Nová úloha: </label>
 				<input type="text" class="span6 input-small" placeholder="Názov" id="task-input" />
 				<button type="submit" class="btn" id="task-create">Vytvor</button>
+%{
+	if (onlyUncompleted) {
+}%
+			<a href="/project/${project.id}/tasks">Zobraz všetky</a>
+%{
+	} else {
+}%
+			<a href="/project/${project.id}/tasks/uncompleted">Zobraz iba nesplnené</a>
+%{
+	}
+}%
 			</form>
 		</div>
 	</div>
@@ -17,9 +28,26 @@
 	<div class="row-fluid">
 		<div class="span7" id="task-list">
 #{list items:project.tasks, as:'task'}
+%{
+	if (!onlyUncompleted || task.completed == false) {
+}%
 			<div class="well well-small task-name">
-				<a class="pull-left" href="#" onClick="task_click('${task.id}')">${task.name}<i class="pull-right icon-forward"></i></a>
+				<a class="pull-left" href="#" onClick="task_click('${task.id}')">
+					${task.name}
+					<i class="pull-right icon-forward"></i>
+	%{
+		if (task.assigned.contains(user)) {
+	%}
+					<span class="pull-right">&nbsp;</span>
+					<span class="label label-info pull-right">Priradená mne</span>
+	%{
+		}
+	}%
+				</a>
 			</div>
+%{
+	}
+}%
 #{/list}
 		</div>
 		<div class="span5 hide" id="task-edit">
@@ -34,6 +62,13 @@
 				<label class="checkbox">
       				Splnená <input type="checkbox" id="task-completed"> 
     			</label>
+    			<label>Priradení ľudia</label>
+    			<select multiple="multiple" id="task_assigned" name="task_assigned">
+#{list items:project.users, as:'usr'}
+					<option value="${usr.email}">${usr.fullname}</option>
+#{/list}
+    			</select>
+    			<br />
     			<button type="submit" class="btn" onClick="task_edit();">Uprav</button>
     			<span class="label label-success" id="task-edit-success">OK</span>
 			</div>

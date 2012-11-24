@@ -1,0 +1,37 @@
+#{extends 'main_nav_sidebar.html' /}
+#{set title:'Šablóny' /}
+
+
+<div class="span8">
+	<h2>Šablóny</h2>
+	<hr />
+	<div class="">
+		<h5>Uploadni novú šablónu</h5>
+	
+			<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/project/${project.id}/templates/upload">
+
+			<div class="control-group">
+				<label class="control-label">Súbor</label> 
+				<div class="controls">
+					<input type="file" name="attachment" id="attachment" />
+				</div>
+			</div>
+
+			<button type="submit" class="btn">Odošli</button>
+		</form>
+	</div>
+
+	<div class="span7 well">
+#{list items:project.templates, as:'file'}
+		<div class="clearfix">
+			<i class="icon-file"></i>${file.filename}
+			<a class="pull-right" href="/public/templates/${file.id}_${file.filename}">
+				Stiahni
+			</a>
+			<a class="pull-right" href="/public/rendered/${file.id}_${file.filename}">
+				Stiahni vytvorený dokument
+			</a>			
+		</div>
+#{/list}
+	</div>
+</div>

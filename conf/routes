@@ -12,10 +12,14 @@ GET		/project/{projectid}/people				ProjectCtrl.people
 GET		/project/{projectid}/adduser			ProjectCtrl.addUser
 GET		/project/{projectid}/exituser/{userid}	ProjectCtrl.exitUser
 GET		/project/{projectid}/tasks				ProjectCtrl.tasks
+GET		/project/{projectid}/tasks/uncompleted	ProjectCtrl.onlyUncompletedTasks
 GET		/project/{projectid}/sources			ProjectCtrl.sources
 GET		/project/{projectid}/files				ProjectCtrl.files
 GET		/project/{projectid}/statistics			ProjectCtrl.statistics
 POST 	/project/{projectid}/sources/upload		ProjectCtrl.sourceUpload
+POST 	/project/{projectid}/files/upload		ProjectCtrl.fileUpload
+GET		/project/{projectid}/templates			ProjectCtrl.templates
+POST 	/project/{projectid}/templates/upload	ProjectCtrl.templateUpload
 
 
 # Ajax

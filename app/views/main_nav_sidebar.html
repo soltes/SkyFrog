@@ -26,6 +26,9 @@
 				<p>
 					<a href="/project/${p.id}/statistics">Štatistiky</a>
 				</p>
+				<p>
+					<a href="/project/${p.id}/templates">Šablóny</a>
+				</p>
 %{
 	if (project != null && p.id == project.id) {
 		out.print('<input class="invisible hide" id="active_project" value="' + (p_index-1) + '" />');

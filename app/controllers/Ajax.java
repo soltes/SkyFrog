@@ -5,9 +5,7 @@
 
 package controllers;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import models.Project;
 import models.Task;
 import models.User;
@@ -36,15 +34,35 @@ public class Ajax extends Controller {
 	
 	public static void getTask(long taskid) {
 		Task t = Task.findById(taskid);
-		renderJSON(t);
+		HashMap<Object, Object> hm = new HashMap<Object, Object>();
+		hm.put("name", t.name);
+		hm.put("start", t.start);
+		hm.put("finish", t.finish);
+		hm.put("completed", t.completed);
+		ArrayList<String> users = new ArrayList<String>();
+		for (User u: t.assigned) {
+			users.add(u.email);
+		}
+		hm.put("assigned", users);
+		renderJSON(hm);
 	}
 	
-	public static void editTask(long taskid, Date start, Date finish, boolean completed) {
+	public static void editTask(long taskid, Date start, Date finish, boolean completed, String[] task_assigned) {
+		
 		Task t = Task.findById(taskid);
 		if (t != null) {
 			t.start = start;
 			t.finish = finish;
 			t.completed = completed;
+			if (task_assigned != null) {
+				t.assigned = new ArrayList<User>();
+				for (int i = 0; i < task_assigned.length; i++) {
+					User u = User.find("byEmail", task_assigned[i]).first();
+					if (u != null) {
+						t.assigned.add(u);
+					}
+				}
+			}
 			t.save();
 		}
 		renderJSON("");
