@@ -3,4 +3,4 @@ User(erik):
   email: erik@gmail.com
   password: secret
   fullname: Erik
-  projects: [project1]
+  projects: []

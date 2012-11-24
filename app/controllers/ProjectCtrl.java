@@ -35,16 +35,17 @@ public class ProjectCtrl extends SecureController {
 	
 	public static void addUser(String people_autocomplete) {
 		User u = User.find("byEmail", people_autocomplete).first();
-		Project current = (Project) renderArgs.get("project");
-		if (!current.users.contains(u)) {
-			current.users.add(u);
-			current.save();
-		}			
-		if (!u.projects.contains(current)) {
-			u.projects.add(current);
-			u.save();
+		if (u != null) {
+			Project current = (Project) renderArgs.get("project");
+			if (!current.users.contains(u)) {
+				current.users.add(u);
+				current.save();
+			}			
+			if (!u.projects.contains(current)) {
+				u.projects.add(current);
+				u.save();
+			}
 		}
-				
 		renderTemplate("ProjectCtrl/people.html");
 	}	
 	
@@ -63,5 +64,19 @@ public class ProjectCtrl extends SecureController {
 		renderTemplate("ProjectCtrl/people.html");
 	}
 	
+	public static void tasks() {
+		render();
+	}
 	
+	public static void sources() {
+		render();
+	}
+	
+	public static void files() {
+		render();
+	}
+	
+	public static void statistics() {
+		render();
+	}
 }

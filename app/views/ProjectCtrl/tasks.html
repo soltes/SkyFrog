@@ -1,0 +1,42 @@
+#{extends 'main_nav_sidebar.html' /}
+#{set title:'Ľudia' /}
+
+<div class="span8">
+	<h2>Úlohy</h2>
+	<hr />
+	<div class="row-fluid">
+		<div class="span8">
+			<form class="form-inline">
+				<label>Nová úloha: </label>
+				<input type="text" class="span6 input-small" placeholder="Názov" id="task-input" />
+				<button type="submit" class="btn" id="task-create">Vytvor</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span7" id="task-list">
+#{list items:project.tasks, as:'task'}
+			<div class="well well-small task-name">
+				<a class="pull-left" href="#" onClick="task_click('${task.id}')">${task.name}<i class="pull-right icon-forward"></i></a>
+			</div>
+#{/list}
+		</div>
+		<div class="span5">
+			<div class="well">
+				<h4>Uprav úlohu</h4>
+				<label>Názov: </label>
+				<input type="text" id="task-name"/>
+				<label>Od: </label>
+				<input type="text" id="task-start" />
+				<label>Do: </label>
+				<input type="text" id="task-finish" />
+				<label class="checkbox">
+      				Splnená <input type="checkbox" id="task-completed"> 
+    			</label>
+    			<button type="submit" class="btn" onClick="task_edit();">Uprav</button>
+    			<span class="label label-success" id="task-edit-success">OK</span>
+			</div>
+		</div>
+	</div>
+</div>

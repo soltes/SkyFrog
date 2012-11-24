@@ -11,9 +11,17 @@ GET		/createnew								ProjectCtrl.createNew
 GET		/project/{projectid}/people				ProjectCtrl.people
 GET		/project/{projectid}/adduser			ProjectCtrl.addUser
 GET		/project/{projectid}/exituser/{userid}	ProjectCtrl.exitUser
+GET		/project/{projectid}/tasks				ProjectCtrl.tasks
+GET		/project/{projectid}/sources			ProjectCtrl.sources
+GET		/project/{projectid}/files				ProjectCtrl.files
+GET		/project/{projectid}/statistics			ProjectCtrl.statistics
+
 
 # Ajax
 GET		/useremails								Ajax.userEmails
+GET		/project/{projectid}/addtask/{task_name}	Ajax.addTask
+GET		/gettask								Ajax.getTask
+GET		/edittask								Ajax.editTask
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

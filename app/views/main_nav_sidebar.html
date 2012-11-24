@@ -20,9 +20,16 @@
 				<p>
 					<a href="/project/${p.id}/sources">Zdrojové kódy</a>
 				</p>
+				<p>
+					<a href="/project/${p.id}/files">Ostatné súbory</a>
+				</p>
+				<p>
+					<a href="/project/${p.id}/statistics">Štatistiky</a>
+				</p>
 %{
 	if (project != null && p.id == project.id) {
 		out.print('<input class="invisible hide" id="active_project" value="' + (p_index-1) + '" />');
+		out.print('<input class="invisible hide" id="project_id" value="' + project.id + '" />');
 	}
 }%
 			</div>

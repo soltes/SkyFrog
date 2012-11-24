@@ -4,6 +4,7 @@
  */
 package models;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -26,10 +27,11 @@ public class Project extends Model {
 	public Project(String name, String desc) {
 		this.name = name;
 		this.desc = desc;
-		this.users = new LinkedList<User>();
-		this.tasks = new LinkedList<Task>();
+		users = new ArrayList<User>();
+		tasks = new ArrayList<Task>();
 	}
 	
+	@Override
 	public String toString() {
 		return name;
 	}
