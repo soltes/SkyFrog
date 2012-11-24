@@ -2,8 +2,50 @@
 #{set title:'Štatistiky' /}
 
 
-<div class="span8">
+<div class="span8" style="overflow-x: scroll;">
 	<h2>Štatistiky</h2>
 	<hr />
+		<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+		
+		<script>
+			var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
+			g.setShowRes(1); // Show/Hide Responsible (0/1)
+			g.setShowDur(1); // Show/Hide Duration (0/1)
+			g.setShowComp(0); // Show/Hide % Complete(0/1)
+			g.setCaptionType('');  // Set to Show Caption
+			g.setShowStartDate(0); // Show/Hide Start Date(0/1)
+			g.setShowEndDate(0); // Show/Hide End Date(0/1)
+			g.setDateInputFormat('mm/dd/yyyy');
+			g.setDateDisplayFormat('dd/mm/yyyy');
+
+			if( g ) {
+%{
+	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM/dd/yyyy");
+}%
+#{list items:project.tasks, as:'task'}
+			g.AddTaskItem(new JSGantt.TaskItem(
+			'${task.id}',
+			'${task.name}',
+			'${df.format(task.start)}',
+			'${df.format(task.finish)}',
+			'${task.completed ? "00ff00" : "ff0000" }', 
+			'', 
+			0, 
+			'${task.assigned.size() > 0 ? task.assigned.get(0).fullname : ""}',
+			0, 
+			0, 
+			0, 
+			1));
+#{/list}
+					g.Draw();	
+					g.DrawDependencies();
+
+					}
+					else
+					{
+						alert("not defined");
+					}
+
+			  </script>        
 
 </div>

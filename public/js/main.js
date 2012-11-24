@@ -74,7 +74,7 @@ function task_click(taskid) {
 			$("#task-finish").val('');
 		}
 		$("#task_assigned > option").map(function () {
-			$(this).removeAttr("selected");
+			$(this).prop("selected", false);
 		});
 		if (task.assigned) {
 			for (var i = 0; i < task.assigned.length; i++) {
