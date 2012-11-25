@@ -10,7 +10,13 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+    	if (Security.isConnected()) {
+    		renderArgs.put("user", SecureController.getConnectedUser());
+        	renderTemplate("Application/index_logged.html");
+        }
+        else {
+        	render();
+        }
     }
 
 }
