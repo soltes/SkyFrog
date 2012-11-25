@@ -10,11 +10,16 @@
           <span class="icon-bar"></span>
         </a>
         <a class="brand" href="/">SkyFrog</a>
+%{ if (user != null) {
+%}
         <div class="nav-collapse collapse pull-right">
           <ul class="nav">
             <li><p class="navbar-text username-box">Prihlásený ako: ${user.fullname} | <a href="@{Secure.logout()}" class="navbar-link">Odhlásiť sa</a></p></li>
           </ul>
         </div><!--/.nav-collapse -->
+%{
+  }
+}%
       </div>
     </div>    
   </div>
