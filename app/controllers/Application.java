@@ -22,5 +22,19 @@ public class Application extends Controller {
         	render();
         }
     }
+   
+    public static void addUser(String email, String password, String password2, String fullname) {
+        User u = User.find("byEmail", email).first();
+        if (password.equals(password2) && u == null) {
+            User newUser = new User(email, password, fullname);
+            newUser.save();
+            renderArgs.put("registerFlash", "Registrácia prebehla úspešne.");
+            renderArgs.put("hideForm", true);
+        }
+        else {
+            renderArgs.put("registerFlash", "Nastala chyba pri registrácii.");
+        }
+        renderTemplate("Application/index.html");
+    }
 
 }

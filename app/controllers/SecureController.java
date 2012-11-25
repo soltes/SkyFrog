@@ -24,7 +24,7 @@ public class SecureController extends Controller {
 			renderArgs.put("user", u);
 		}
 	}
-
+        
 	public static void index() {
 		render();
 	}
