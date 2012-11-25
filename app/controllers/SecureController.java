@@ -1,9 +1,8 @@
 package controllers;
 
-
+import models.*;
 import controllers.Security;
 import java.net.ConnectException;
-import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -18,7 +17,11 @@ public class SecureController extends Controller {
 	@Before
 	static void setConnectedUser() {
 		if (Security.isConnected()) {
-			renderArgs.put("user", getConnectedUser());
+			User u = getConnectedUser();
+			if (u.isProfessor) {
+				u.projects = Project.findAll();
+			}
+			renderArgs.put("user", u);
 		}
 	}
 

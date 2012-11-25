@@ -10,8 +10,12 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-    	if (Security.isConnected()) {
-    		renderArgs.put("user", SecureController.getConnectedUser());
+    	if (Security.isConnected()) {			
+			User u = SecureController.getConnectedUser();
+    		if (u.isProfessor) {
+				u.projects = Project.findAll();
+			}
+			renderArgs.put("user", u);
         	renderTemplate("Application/index_logged.html");
         }
         else {

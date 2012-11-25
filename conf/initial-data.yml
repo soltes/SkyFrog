@@ -10,3 +10,4 @@ User(andrej):
   password: secret
   fullname: Andrej
   projects: []
+  idProfessor: true
