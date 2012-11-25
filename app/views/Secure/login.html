@@ -1,0 +1,36 @@
+#{extends 'Secure/layout.html' /}
+
+<div id="login">
+    <h2 align="center">Prihlásenie</h2>
+	<h1>&{'secure.title'}</h1>
+		
+	#{form @authenticate()}
+		
+		#{if flash.error}
+			<p class="error">
+				Uuups, zlé meno alebo heslo.
+			</p>
+		#{/if}
+		#{if flash.success}
+			<p class="success">
+				Boli ste úspešne odhlásení.
+			</p>
+		#{/if}
+	
+		<p id="username-field">
+			<label for="username">Meno:</label>
+			<input type="text" name="username" id="username" value="${flash.username}" />
+		</p>
+		<p id="password-field">
+			<label for="password">Heslo:</label>
+			<input type="password" name="password" id="password" value="" />
+		</p>
+		<p id="remember-field">
+			<input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />
+			<label for="remember">Zapamätaj si ma</label>
+		</p>
+		<p id="signin-field">
+			<input type="submit" id="signin" value="Prihlás ma" />
+		</p>
+	#{/form}
+</div>
