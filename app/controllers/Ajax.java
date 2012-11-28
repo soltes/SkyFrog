@@ -57,10 +57,11 @@ public class Ajax extends Controller {
 		renderJSON(hm);
 	}
 	
-	public static void editTask(long taskid, Date start, Date finish, boolean completed, String[] task_assigned) {
+	public static void editTask(long taskid, String name, Date start, Date finish, boolean completed, String[] task_assigned) {
 		
 		Task t = Task.findById(taskid);
 		if (t != null) {
+			t.name = name;
 			t.start = start;
 			t.finish = finish;
 			t.completed = completed;

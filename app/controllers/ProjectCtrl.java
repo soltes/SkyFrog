@@ -115,12 +115,12 @@ public class ProjectCtrl extends SecureController {
 	}
 
 	public static void sources() {
-                Project current = (Project) renderArgs.get("project");
-                File zipSource = new File("public/sources/" + current.id + "_" + current.name + ".zip");
-                if (zipSource.exists()) {
-                    renderArgs.put("zipFile", zipSource.getPath());
-                }
-                render();
+		Project current = (Project) renderArgs.get("project");
+		File zipSource = new File("public/sources/" + current.id + "_" + current.name + ".zip");
+		if (zipSource.exists()) {
+			renderArgs.put("zipFile", zipSource.getPath());
+		}
+		render();
 	}
 
 	public static void files() {
