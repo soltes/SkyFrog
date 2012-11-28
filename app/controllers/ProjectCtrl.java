@@ -3,25 +3,28 @@ package controllers;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import play.mvc.*;
-
-
+import javax.xml.bind.JAXBException;
 import models.*;
-import net.sourceforge.rtf.RTFTemplate;
-import net.sourceforge.rtf.UnsupportedRTFTemplate;
-import net.sourceforge.rtf.helper.RTFTemplateBuilder;
 import org.apache.commons.io.FileUtils;
+import org.docx4j.XmlUtils;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.io.SaveToZipFile;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.wml.Document;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import play.db.jpa.Blob;
+import play.libs.MimeTypes;
+import play.mvc.Before;
+import play.mvc.With;
 
 @With(Secure.class)
 public class ProjectCtrl extends SecureController {
@@ -127,94 +130,88 @@ public class ProjectCtrl extends SecureController {
 		render();
 	}
 
-	public static void sourceUpload(String giturl) {
-                Project current = (Project) renderArgs.get("project");
-                current.giturl = giturl;
-                current.save();
-                
-                File tmpGitDir = new File("tmp/gitsource/" + current.id + "_" + current.name);
-                if (tmpGitDir.exists()) {
-                    try {
-                        FileUtils.deleteDirectory(tmpGitDir);
-                    } catch (IOException ex) {
-                        renderArgs.put("FlashMsg", "Nastala chyba pri sťahovaní súborov z git repository.");
-                    }
-                }
-                
-                File zipFile = new File("public/sources/" + current.id + "_" + current.name + ".zip");
-                if (zipFile.exists()) {
-                    zipFile.delete();
-                }
-                
-                FileRepositoryBuilder builder = new FileRepositoryBuilder();
-                try {
-                    Repository repository = builder.setGitDir(tmpGitDir).readEnvironment().findGitDir().build();
-
-                    Git git = new Git(repository);
-                
-                    CloneCommand clone = new CloneCommand().setBare(false).setCloneAllBranches(true).setDirectory(tmpGitDir).setURI(giturl);
-                    try {
-                        clone.call();
-                    } catch (GitAPIException ex) {
-                        renderArgs.put("FlashMsg", "Nastala chyba pri sťahovaní súborov z git repository.");
-                    }
-                    
-                    
-                } catch (IOException ex) {
-                    renderArgs.put("FlashMsg", "Nastala chyba pri sťahovaní súborov z git repository.");
-                }
-                try {
-                    ZipOutputStream zipOutput = new ZipOutputStream(new FileOutputStream("public/sources/" + current.id + "_" + current.name + ".zip"));
-                    zipDir("tmp/gitsource/" + current.id + "_" + current.name, zipOutput);
-                    zipOutput.close();
-                } catch (Exception e) {
-                    renderArgs.put("FlashMsg", "Nastala chyba pri vytváraní ZIP archívu.");
-                }
-                
-		renderTemplate("ProjectCtrl/sources.html");
-	}
-	
-	public static void fileUpload(String version, String type, File attachment) {
-		String name = attachment.getName();
-		MiscFile mf = new MiscFile(name, version, type);
-		mf.save();
-		File target = new File("public/files/" + mf.id + "_" + mf.filename);
-		InputStream in;
-		OutputStream out;
-
-		try {
-			in = new FileInputStream(attachment.getAbsolutePath());
-			out = new FileOutputStream(target.getAbsolutePath());
-			byte[] buf = new byte[1024];
-			int len;
-			while ((len = in.read(buf)) > 0) {
-				out.write(buf, 0, len);
+	public static void sourceUpload(String giturl, String version) {
+		Project current = (Project) renderArgs.get("project");
+		current.giturl = giturl;
+		
+		SourceFile sf = new SourceFile();
+		sf.version = version;
+		sf.save();
+		//sf.id je definovane az po save()
+		sf.filename = sf.id + "_" + current.name + ".zip";
+		sf.save();
+		
+		File tmpGitDir = new File("tmp/gitsource/" + sf.filename + "/");
+		if (tmpGitDir.exists()) {
+			try {
+				FileUtils.deleteDirectory(tmpGitDir);
+			} catch (IOException ex) {
+				renderArgs.put("FlashMsg", "Nastala chyba pri sťahovaní súborov z git repository1.");
 			}
-			in.close();
-			out.close();
-		} catch (IOException ex) {
-			mf.delete();
-			//renderText("nastala chyba pri uploade suboru");
-                        renderText(ex.getMessage());
 		}
 
-//		try {
-//			Files.copy(attachment.toPath(), target.toPath());
-//		} catch (IOException ex) {
-//			sf.delete();
-//			renderText("nastala chyba pri uploade suboru");
-//		}
+		File zipFile = new File("public/sources/" + sf.filename);
+		if (zipFile.exists()) {
+			zipFile.delete();
+		}
+
+		FileRepositoryBuilder builder = new FileRepositoryBuilder();
+		try {
+			Repository repository = builder.setGitDir(tmpGitDir).readEnvironment().findGitDir().build();
+
+			Git git = new Git(repository);
+
+			CloneCommand clone = new CloneCommand().setBare(false).setCloneAllBranches(true).setDirectory(tmpGitDir).setURI(giturl);
+			try {
+				clone.call();
+			} catch (GitAPIException ex) {
+				System.out.println(ex);
+				renderArgs.put("FlashMsg", "Nastala chyba pri sťahovaní súborov z git repository2.");
+			}
+
+
+		} catch (IOException ex) {
+			renderArgs.put("FlashMsg", "Nastala chyba pri sťahovaní súborov z git repository3.");
+		}
+		try {
+			ZipOutputStream zipOutput = new ZipOutputStream(new FileOutputStream("public/sources/" + sf.filename));
+			zipDir("tmp/gitsource/" + sf.filename, zipOutput);
+			zipOutput.close();
+		} catch (Exception e) {
+			renderArgs.put("FlashMsg", "Nastala chyba pri vytváraní ZIP archívu.");
+		}
+		
+		current.sources.add(0, sf);
+		current.save();
+		renderTemplate("ProjectCtrl/sources.html");
+	}
+
+	public static void fileUpload(MiscFile s, File file) {
+		s.name = file.getName();
+		s.file = new Blob();
+		try {
+			s.file.set(new FileInputStream(file), MimeTypes.getContentType(file.getName()));
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(ProjectCtrl.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		s.save();
 		Project current = (Project) renderArgs.get("project");
-		current.files.add(0, mf);
+		current.files.add(0, s);
 		current.save();
 		renderTemplate("ProjectCtrl/files.html");
+	}
+	
+	public static void downloadFile(long id) {
+		MiscFile mf = MiscFile.findById(id);  
+		java.io.InputStream binaryData = mf.file.get();
+		renderBinary(binaryData);
 	}
 	
 	public static void templates() {
 		render();
 	}
 		
-	public static void templateUpload(File attachment) throws UnsupportedRTFTemplate, FileNotFoundException, Exception {
+	public static void templateUpload(File attachment) throws FileNotFoundException, Exception {
 		String name = attachment.getName();
 		Template mf = new Template(name);
 		mf.save();
@@ -237,57 +234,72 @@ public class ProjectCtrl extends SecureController {
 			renderText("nastala chyba pri uploade suboru");
 		}
 
-//		try {
-//			Files.copy(attachment.toPath(), target.toPath());
-//		} catch (IOException ex) {
-//			sf.delete();
-//			renderText("nastala chyba pri uploade suboru");
-//		}
 		Project current = (Project) renderArgs.get("project");
 		current.templates.add(0, mf);
 		current.save();
-		
-		//vyrenderuj template
-		String renderedFile = "public/rendered/" + target.getName();
 
-		RTFTemplateBuilder builder = RTFTemplateBuilder.newRTFTemplateBuilder();
-
-		// 2. Get RTFtemplate with default Implementation of template engine (Velocity) 
-		RTFTemplate rtfTemplate = builder.newRTFTemplate();
-
-		rtfTemplate.setTemplate(target);
-		
-		rtfTemplate.put("project", current);
-
-		rtfTemplate.merge(new File(renderedFile));
-		
 		renderTemplate("ProjectCtrl/templates.html");
 	}
         
-        private static void zipDir(String dir, ZipOutputStream output) {
-            try {
-                File zipDir = new File(dir);
-                String[] dirList = zipDir.list();
-                byte[] readBuffer = new byte[2156];
-                int bytesIn = 0;
-                for (int i = 0; i < dirList.length; i++) {
-                    File f = new File(zipDir, dirList[i]);
-                    if (f.isDirectory()) {
-                        String filePath = f.getPath();
-                        zipDir(filePath, output);
-                        continue;
-                    }
-                    FileInputStream input = new FileInputStream(f);
-                    ZipEntry entry = new ZipEntry(f.getPath());
-                    output.putNextEntry(entry);
-                    while ((bytesIn = input.read(readBuffer)) != -1) {
-                        output.write(readBuffer, 0, bytesIn);
-                    }
-                    input.close();
-                }
-            }
-            catch(Exception e) {
-                renderArgs.put("FlashMsg", "Nastala chyba pri vytváraní ZIP archívu.");
-            }
-        }
+	private static void zipDir(String dir, ZipOutputStream output) {
+		try {
+			File zipDir = new File(dir);
+			String[] dirList = zipDir.list();
+			byte[] readBuffer = new byte[2156];
+			int bytesIn = 0;
+			for (int i = 0; i < dirList.length; i++) {
+				File f = new File(zipDir, dirList[i]);
+				if (f.isDirectory()) {
+					String filePath = f.getPath();
+					zipDir(filePath, output);
+					continue;
+				}
+				FileInputStream input = new FileInputStream(f);
+				ZipEntry entry = new ZipEntry(f.getPath());
+				output.putNextEntry(entry);
+				while ((bytesIn = input.read(readBuffer)) != -1) {
+					output.write(readBuffer, 0, bytesIn);
+				}
+				input.close();
+			}
+		} catch (Exception e) {
+			renderArgs.put("FlashMsg", "Nastala chyba pri vytváraní ZIP archívu.");
+		}
+	}
+		
+	public static void render(long templid) throws Docx4JException, JAXBException {
+		Template t = Template.findById(templid);
+		Project project = (Project) renderArgs.get("project");
+		
+		String outputfilepath = System.getProperty("user.dir") + "/public/rendered/" + t.filename;
+
+		// Open a document from the file system
+		// 1. Load the Package
+		File templfile = new File("public/templates/" + t.id + "_" + t.filename);
+		WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templfile);
+
+		// 2. Fetch the document parkt 		
+		MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+
+		org.docx4j.wml.Document wmlDocumentEl = (org.docx4j.wml.Document) documentPart.getJaxbElement();
+
+		//xml --> string
+		String xml = XmlUtils.marshaltoString(wmlDocumentEl, true);
+
+		HashMap<String, String> mappings = new HashMap<String, String>();
+
+		mappings.put("name", project.name);
+		mappings.put("description", project.desc);
+
+		//valorize template
+		Object obj = XmlUtils.unmarshallFromTemplate(xml, mappings);
+
+		//change  JaxbElement
+		documentPart.setJaxbElement((Document) obj);
+
+		SaveToZipFile saver = new SaveToZipFile(wordMLPackage);
+		saver.save(outputfilepath);
+		
+		renderBinary(new File(outputfilepath));
+	}
 }

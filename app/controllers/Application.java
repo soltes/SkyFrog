@@ -15,7 +15,10 @@ public class Application extends Controller {
 			if (u.isProfessor) {
 				if (session.contains("courseid")){
 					Course c = Course.findById(Long.valueOf(session.get("courseid")));
-					u.projects = c.projects.subList(0, c.projects.size());
+					if (c != null && c.projects != null)
+						u.projects = c.projects.subList(0, c.projects.size());
+					else
+						u.projects = new ArrayList<Project>();
 				} else {
 					u.projects = Project.findAll();
 				}

@@ -2,3 +2,4 @@
 
 require:
     - play
+    - org.docx4j -> docx4j 2.7.1

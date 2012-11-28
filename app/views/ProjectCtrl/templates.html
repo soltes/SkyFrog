@@ -26,10 +26,10 @@
 		<div class="clearfix">
 			<i class="icon-file"></i>${file.filename}
 			<a class="pull-right" href="/public/templates/${file.id}_${file.filename}">
-				Stiahni
+				Stiahni šablónu
 			</a>
-			<a class="pull-right" href="/public/rendered/${file.id}_${file.filename}">
-				Stiahni vytvorený dokument
+			<a class="pull-right" href="/project/${project.id}/render/${file.id}">
+				Stiahni vytvorený dokument&nbsp;&nbsp;&nbsp;
 			</a>			
 		</div>
 #{/list}

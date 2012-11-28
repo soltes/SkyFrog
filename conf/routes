@@ -23,7 +23,7 @@ GET		/project/{projectid}/templates			ProjectCtrl.templates
 POST 	/project/{projectid}/templates/upload	ProjectCtrl.templateUpload
 GET		/profselectcourse						ProjectCtrl.profSelectCourse
 GET 	/createnewcourse						ProjectCtrl.createNewCourse
-
+GET 	/project/{projectid}/render/{templid}	ProjectCtrl.render
 
 # Ajax
 GET		/useremails								Ajax.userEmails

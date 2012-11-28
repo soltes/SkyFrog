@@ -2,18 +2,15 @@
 package models;
 
 import javax.persistence.Entity;
+import play.db.jpa.Blob;
 import play.db.jpa.Model;
 
 @Entity
 public class MiscFile extends Model {
-	public String filename;
+	public String name;
 	public String version;
 	public String type;
+	public Blob file;
 
-	public MiscFile(String filename, String version, String type) {
-		this.filename = filename;
-		this.version = version;
-		this.type = type;
-	}
 
 }

@@ -13,9 +13,15 @@
 			<div class="control-group">
 				<label class="control-label">Git resource:</label> 
 				<div class="controls">
-					<input type="url" name="giturl" id="giturl" />
+					<input type="url" name="giturl" id="giturl" value="${project.giturl}"/>
 				</div>
-			</div>			 
+			</div>	
+			<div class="control-group">
+				<label class="control-label">Verzia:</label> 
+				<div class="controls">
+					<input type="text" name="version" id="version" />
+				</div>
+			</div>				 
 			<button type="submit" class="btn">Stiahnuť</button>
 		</form>
                 #{if FlashMsg}
@@ -29,7 +35,7 @@
 #{list items:project.sources, as:'source'}
 		<div class="clearfix">
 			<i class="icon-file"></i>${source.filename}, verzia: ${source.version}
-			<a class="pull-right" href="/public/sourcefiles/${source.id}_${source.filename}">
+			<a class="pull-right" href="/public/sources/${source.filename}">
 				Stiahni
 			</a>
 		</div>

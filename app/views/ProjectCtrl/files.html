@@ -13,19 +13,19 @@
 			<div class="control-group">
 				<label class="control-label">Súbor</label> 
 				<div class="controls">
-					<input type="file" name="attachment" id="attachment" />
+					<input type="file" name="file" id="file" />
 				</div>
 			</div>			 
 			<div class="control-group">
 				<label class="control-label">Verzia:</label> 
 				<div class="controls">
-					<input type="input" name="version" id="version" placeholder="1.0" />
+					<input type="input" name="s.version" id="version" placeholder="1.0" />
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Typ:</label> 
 				<div class="controls">
-					<input type="input" name="type" id="type" placeholder="" />
+					<input type="input" name="s.type" id="type" placeholder="" />
 				</div>
 			</div>
 
@@ -36,8 +36,8 @@
 	<div class="span7 well">
 #{list items:project.files, as:'file'}
 		<div class="clearfix">
-			<i class="icon-file"></i>${file.filename}, verzia: ${file.version}, typ: ${file.type}
-			<a class="pull-right" href="/public/files/${file.id}_${file.filename}">
+			<i class="icon-file"></i>${file.name}, verzia: ${file.version}, typ: ${file.type}
+			<a class="pull-right" href="@{ProjectCtrl.downloadFile(file.id)}">
 				Stiahni
 			</a>
 		</div>
