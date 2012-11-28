@@ -7,23 +7,21 @@
 	<hr />
 
 	<div class="">
-		<h5>Uploadni nový súbor</h5>
-			<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/project/${project.id}/sources/upload">
+		<h5>Nahrať zdrojové súbory:</h5>
+			<form class="form-horizontal" method="POST" action="/project/${project.id}/sources/upload">
 
 			<div class="control-group">
-				<label class="control-label">Súbor</label> 
+				<label class="control-label">Git resource:</label> 
 				<div class="controls">
-					<input type="file" name="attachment" id="attachment" />
+					<input type="url" name="giturl" id="giturl" />
 				</div>
 			</div>			 
-			<div class="control-group">
-				<label class="control-label">Verzia:</label> 
-				<div class="controls">
-					<input type="input" name="version" id="version" placeholder="1.0" />
-				</div>
-			</div>
-			<button type="submit" class="btn">Odošli</button>
+			<button type="submit" class="btn">Stiahnuť</button>
 		</form>
+                #{if FlashMsg}
+                    &{FlashMsg}
+                #{/if}
+                <p>
 	</div>
 
 	<div class="span7 well">
