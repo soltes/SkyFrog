@@ -13,12 +13,10 @@ public class Application extends Controller {
     	if (Security.isConnected()) {
 			User u = SecureController.getConnectedUser();
 			if (u.isProfessor) {
-				if (session.contains("courseid")){
+				if (session.contains("courseid")) {
 					Course c = Course.findById(Long.valueOf(session.get("courseid")));
-					if (c != null && c.projects != null)
-						u.projects = c.projects.subList(0, c.projects.size());
-					else
-						u.projects = new ArrayList<Project>();
+					u.projects = c.projects.subList(0, c.projects.size());
+					renderArgs.put("courseid", session.get("courseid"));
 				} else {
 					u.projects = Project.findAll();
 				}

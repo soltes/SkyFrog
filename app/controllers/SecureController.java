@@ -23,6 +23,7 @@ public class SecureController extends Controller {
 				if (session.contains("courseid")){
 					Course c = Course.findById(Long.valueOf(session.get("courseid")));
 					u.projects = c.projects.subList(0, c.projects.size());
+					renderArgs.put("courseid", session.get("courseid"));
 				} else {
 					u.projects = Project.findAll();
 				}

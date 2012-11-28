@@ -2,10 +2,12 @@
 
 <div class="row-fluid">
 	<div class="span4 well">
-
+%{ 
+	if (!user.isProfessor) {
+%}
 		<a class="btn btn-primary" href="/createnew">Nový projekt</a>
 %{
-if (user.isProfessor) {
+	} else {
 }%
 <a class="btn btn-primary" href="/createnewcourse">Nový kurz</a>
 <p>
@@ -15,7 +17,17 @@ if (user.isProfessor) {
 <form method="GET" action="/profselectcourse" class="form-inline">
 	<select name="courseid">
 #{list items:courses, as:'course'}
+%{
+	if (courseid != null && Long.valueOf(courseid).compareTo(course.id) == 0) {
+}%
+		<option value="${course.id}" selected="selected">${course.name}</option>
+%{
+	} else {
+}%
 		<option value="${course.id}">${course.name}</option>
+%{
+	}
+}%
 #{/list}
 	</select>
 	<button type="submit" class="btn btn-primary">Potvrď</button>

@@ -57,15 +57,16 @@ public class ProjectCtrl extends SecureController {
 	public static void addProject(String name, String desc, long course) {
 		Project p = new Project(name, desc);
 		User u = getConnectedUser();
-		p.users.add(u);
+		p.save();
 		u.projects.add(p);
+		u.save();
+		p.users.add(u);
+		p.save();
 		Course c = Course.findById(course);
 		if (c.projects == null) {
 			c.projects = new ArrayList<Project>();
 		}
 		c.projects.add(p);
-		p.save();
-		u.save();
 		c.save();
 		Application.index();
 	}
