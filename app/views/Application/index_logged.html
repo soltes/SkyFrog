@@ -1,2 +1,39 @@
 #{extends 'main_nav_sidebar.html' /}
 #{set title:'Úvodná stránka' /}
+
+<div class="span8">
+	<h2>Vitajte, ${user.fullname}!</h2>
+        <hr />
+	<div class="">
+%{ 
+	if (!user.isProfessor) {
+%}
+            <h5>Zoznam aktuálnych úloh:</h5>
+                <div class="span7 well">
+#{list items:user.projects.tasks, as:'task'}
+%{
+        java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM/dd/yyyy");
+	if ((!onlyUncompleted || task.completed == false)) {
+}%
+        <p>${task.name}</p>
+%{
+	}
+}%
+#{/list}
+                </div>
+            
+%{
+	} else {
+}%
+            <h5>Zoznam aktuálnych projektov:</h5>
+                <div class="span7 well">
+#{list items:user.projects, as:'project'}
+            <p>${project.name}</p>
+#{/list}
+                </div>
+            
+%{
+	}
+}%
+        </div>
+</div>

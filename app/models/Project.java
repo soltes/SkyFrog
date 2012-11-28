@@ -16,7 +16,7 @@ public class Project extends Model {
 	
 	public String name;
 	public String desc;
-    public String giturl;
+        public String giturl;
 	
 	@ManyToMany
 	public List<User> users;
