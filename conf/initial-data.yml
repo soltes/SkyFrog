@@ -10,4 +10,10 @@ User(andrej):
   password: secret
   fullname: Andrej
   projects: []
-  idProfessor: true
+  isProfessor: true
+
+Course(twsp):
+  name: twsp
+
+Course(magsa):
+  name: Magsa

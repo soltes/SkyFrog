@@ -4,6 +4,26 @@
 	<div class="span4 well">
 
 		<a class="btn btn-primary" href="/createnew">Nový projekt</a>
+%{
+if (user.isProfessor) {
+}%
+<a class="btn btn-primary" href="/createnewcourse">Nový kurz</a>
+<p>
+	<p>
+	Zobraz projekty len z kurzu:
+	</p>
+<form method="GET" action="/profselectcourse" class="form-inline">
+	<select name="courseid">
+#{list items:courses, as:'course'}
+		<option value="${course.id}">${course.name}</option>
+#{/list}
+	</select>
+	<button type="submit" class="btn btn-primary">Potvrď</button>
+</form>
+</p>
+%{	
+}
+}%
 		<hr />
 		<div id="accordion">
 

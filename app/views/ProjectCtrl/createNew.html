@@ -23,6 +23,16 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label" for="desc">Popis</label>
+					<div class="controls">
+						<select name="course">
+#{list items:courses, as:'course'}
+							<option value="${course.id}">${course.name}</option>
+#{/list}
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label" for="desc"></label>
 					<div class="controls">
 						<button class="btn btn-primary" type="submit">Vytvor projekt</button>

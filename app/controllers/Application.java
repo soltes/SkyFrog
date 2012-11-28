@@ -10,11 +10,18 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-    	if (Security.isConnected()) {			
+    	if (Security.isConnected()) {
 			User u = SecureController.getConnectedUser();
-    		if (u.isProfessor) {
-				u.projects = Project.findAll();
+			if (u.isProfessor) {
+				if (session.contains("courseid")){
+					Course c = Course.findById(Long.valueOf(session.get("courseid")));
+					u.projects = c.projects.subList(0, c.projects.size());
+				} else {
+					u.projects = Project.findAll();
+				}
 			}
+			List<Course> courses = Course.findAll();
+			renderArgs.put("courses", courses);
 			renderArgs.put("user", u);
         	renderTemplate("Application/index_logged.html");
         }

@@ -1,7 +1,9 @@
 package controllers;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import play.mvc.*;
 
@@ -19,18 +21,39 @@ public class ProjectCtrl extends SecureController {
 		Project p = Project.findById(projectid);
 		renderArgs.put("project", p);
 	}
+	
+	public static void profSelectCourse(long courseid) {
+		session.put("courseid", courseid);
+		Application.index();
+	}
 
 	public static void createNew() {
 		render();
 	}
 
-	public static void addProject(String name, String desc) {
+	public static void createNewCourse() {
+		render();
+	}
+	
+	public static void addCourse(String name) {
+		Course c = new Course(name);
+		c.save();
+		Application.index();
+	}
+	
+	public static void addProject(String name, String desc, long course) {
 		Project p = new Project(name, desc);
 		User u = getConnectedUser();
 		p.users.add(u);
 		u.projects.add(p);
+		Course c = Course.findById(course);
+		if (c.projects == null) {
+			c.projects = new ArrayList<Project>();
+		}
+		c.projects.add(p);
 		p.save();
 		u.save();
+		c.save();
 		Application.index();
 	}
 

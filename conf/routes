@@ -3,9 +3,8 @@
 # ~~~~
 
 # Home page
-GET             /									Application.index
-POST            /                                                                       Application.addUser
-GET		/pokus									Template.pokus
+GET             /								Application.index
+POST            /                               Application.addUser
 
 
 # Projektove stranky
@@ -22,6 +21,8 @@ POST 	/project/{projectid}/sources/upload		ProjectCtrl.sourceUpload
 POST 	/project/{projectid}/files/upload		ProjectCtrl.fileUpload
 GET		/project/{projectid}/templates			ProjectCtrl.templates
 POST 	/project/{projectid}/templates/upload	ProjectCtrl.templateUpload
+GET		/profselectcourse						ProjectCtrl.profSelectCourse
+GET 	/createnewcourse						ProjectCtrl.createNewCourse
 
 
 # Ajax
