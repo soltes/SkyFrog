@@ -10,15 +10,22 @@
 %}
             <h5>Zoznam aktuálnych úloh:</h5>
                 <div class="span7 well">
-#{list items:user.projects.tasks, as:'task'}
+#{list items:user.projects, as:'pr'}
+<h5>Projekt: ${pr.name}</h5>
+#{list items:pr.tasks, as:'task'}
 %{
-        java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM/dd/yyyy");
-	if ((!onlyUncompleted || task.completed == false)) {
+    java.util.Date today = new java.util.Date();
+    java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM/dd/yyyy");
+	if (task.completed == false 
+        && task.start != null
+        && task.start.compareTo(today) < 0 
+        && (task.finish == null || task.finish.compareTo(today) > 0)) {
 }%
-        <p>${task.name}</p>
+        <p>${task.name}, do ${task.finish == null ? "" : df.format(task.finish)}</p>
 %{
 	}
 }%
+#{/list}
 #{/list}
                 </div>
             
