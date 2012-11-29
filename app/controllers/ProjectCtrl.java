@@ -291,6 +291,16 @@ public class ProjectCtrl extends SecureController {
 
 		mappings.put("name", project.name);
 		mappings.put("description", project.desc);
+                
+                String users = "";
+                for (int i = 0; i < project.users.size(); i++) {
+                    users += project.users.get(i).fullname;
+                    if (i < project.users.size() - 1) {
+                        users += ", ";
+                    }
+                }
+                
+                mappings.put("users", users);
 
 		//valorize template
 		Object obj = XmlUtils.unmarshallFromTemplate(xml, mappings);
