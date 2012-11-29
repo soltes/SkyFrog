@@ -14,13 +14,13 @@ public class SecureController extends Controller {
 	static User getConnectedUser() {
 		return User.find("byEmail", Security.connected()).first();
 	}
-	
+
 	@Before
 	static void setConnectedUser() {
 		if (Security.isConnected()) {
 			User u = getConnectedUser();
 			if (u.isProfessor) {
-				if (session.contains("courseid")){
+				if (session.contains("courseid")) {
 					Course c = Course.findById(Long.valueOf(session.get("courseid")));
 					u.projects = c.projects.subList(0, c.projects.size());
 					renderArgs.put("courseid", session.get("courseid"));
@@ -33,7 +33,7 @@ public class SecureController extends Controller {
 			renderArgs.put("user", u);
 		}
 	}
-        
+
 	public static void index() {
 		render();
 	}

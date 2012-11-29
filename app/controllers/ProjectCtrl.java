@@ -205,7 +205,7 @@ public class ProjectCtrl extends SecureController {
 	public static void downloadFile(long id) {
 		MiscFile mf = MiscFile.findById(id);  
 		java.io.InputStream binaryData = mf.file.get();
-		renderBinary(binaryData);
+		renderBinary(binaryData, mf.name);
 	}
 	
 	public static void templates() {

@@ -5,20 +5,10 @@
 
 package controllers;
 
-import java.io.File;
 import java.util.*;
-import javax.xml.bind.JAXBException;
 import models.Project;
 import models.Task;
-import models.Template;
 import models.User;
-import org.docx4j.XmlUtils;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.io.SaveToZipFile;
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.Document;
-import play.db.jpa.GenericModel;
 import play.mvc.Controller;
 
 
