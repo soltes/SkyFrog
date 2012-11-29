@@ -21,7 +21,10 @@
         && task.start.compareTo(today) < 0 
         && (task.finish == null || task.finish.compareTo(today) > 0)) {
 }%
-        <p>${task.name}, do ${task.finish == null ? "" : df.format(task.finish)}</p>
+        <div class="alert alert-block">
+                <strong>${task.name}</strong>
+                <p>Urobiť do: ${task.finish == null ? "" : df.format(task.finish)}</p>
+        </div>
 %{
 	}
 }%
@@ -35,7 +38,10 @@
             <h5>Zoznam aktuálnych projektov:</h5>
                 <div class="span7 well">
 #{list items:user.projects, as:'project'}
-            <p>${project.name}</p>
+            <div class="alert alert-block">
+                    <strong>${project.name}</strong>
+                    <p>${project.desc}</p>
+            </div>
 #{/list}
                 </div>
             
