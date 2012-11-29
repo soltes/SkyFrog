@@ -15,7 +15,7 @@
 #{list items:pr.tasks, as:'task'}
 %{
     java.util.Date today = new java.util.Date();
-    java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM/dd/yyyy");
+    java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("dd-MM-yyyy");
 	if (task.completed == false 
         && task.start != null
         && task.start.compareTo(today) < 0 
